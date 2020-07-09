@@ -1,10 +1,22 @@
 import React from 'react';
-import {
-  Text,
-} from 'react-native';
+import {View, Text, SafeAreaView} from 'react-native';
+import {Item, Input, Label, Form} from 'native-base';
 
 const App = () => {
-  return <Text>Hello</Text>
+  return (
+    <SafeAreaView>
+      <Form>
+        <Item floatingLabel>
+          <Label>Username</Label>
+          <Input />
+        </Item>
+        <Item floatingLabel last>
+          <Label>Password</Label>
+          <Input />
+        </Item>
+      </Form>
+    </SafeAreaView>
+  );
 };
 
 export default App;
