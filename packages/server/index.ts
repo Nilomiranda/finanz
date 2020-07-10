@@ -2,6 +2,8 @@ import Koa from 'koa';
 import mongoose from 'mongoose';
 import Router from 'koa-router';
 import { ApolloServer, gql } from 'apollo-server-koa';
+import { GraphQLSchema } from 'graphql';
+import rootSchema from './src/schemas/rootSchema';
 
 const app = new Koa();
 const router = new Router();
@@ -35,8 +37,9 @@ const resolvers = {
 
 const apolloServer = new ApolloServer({
   playground: true,
-  typeDefs,
-  resolvers,
+  schema: new GraphQLSchema({
+    query: rootSchema,
+  }),
 });
 
 apolloServer.applyMiddleware({ app });
