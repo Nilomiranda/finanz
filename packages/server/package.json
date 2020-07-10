@@ -8,12 +8,18 @@
   },
   "devDependencies": {
     "@types/koa": "^2.11.3",
+    "@types/mongoose": "^5.7.31",
     "@types/node": "^14.0.20",
     "ts-node": "^8.10.2",
     "tsc-watch": "^4.2.9",
     "typescript": "^3.9.6"
   },
   "dependencies": {
-    "koa": "^2.13.0"
+    "apollo-server-koa": "^2.15.1",
+    "graphql": "^15.3.0",
+    "koa": "^2.13.0",
+    "koa-mongo": "^1.9.1",
+    "koa-router": "^9.1.0",
+    "mongoose": "^5.9.22"
   }
 }
