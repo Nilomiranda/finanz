@@ -17,7 +17,6 @@ var rootSchema = new graphql_1.GraphQLObjectType({
                 }
             },
             resolve: function (parent, args, context, info) {
-                // return parent;
                 return UsersController_1["default"].getUser(args.id);
             }
         }

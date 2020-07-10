@@ -22,6 +22,12 @@ var userType = new graphql_1.GraphQLObjectType({
             resolve: function (parent, args, context, info) {
                 return parent.email;
             }
+        },
+        createdAt: {
+            type: graphql_1.GraphQLString,
+            resolve: function (parent, args, context, info) {
+                return parent.createdAt;
+            }
         }
     }
 });

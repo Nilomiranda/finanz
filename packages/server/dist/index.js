@@ -13,6 +13,7 @@ var koa_router_1 = __importDefault(require("koa-router"));
 var apollo_server_koa_1 = require("apollo-server-koa");
 var graphql_1 = require("graphql");
 var rootSchema_1 = __importDefault(require("./src/schemas/rootSchema"));
+var rootMutation_1 = __importDefault(require("./src/mutations/rootMutation"));
 var app = new koa_1["default"]();
 var router = new koa_router_1["default"]();
 mongoose_1["default"].connect('mongodb://localhost/finanz?authSource=admin', {
@@ -36,7 +37,8 @@ var resolvers = {
 var apolloServer = new apollo_server_koa_1.ApolloServer({
     playground: true,
     schema: new graphql_1.GraphQLSchema({
-        query: rootSchema_1["default"]
+        query: rootSchema_1["default"],
+        mutation: rootMutation_1["default"]
     })
 });
 apolloServer.applyMiddleware({ app: app });

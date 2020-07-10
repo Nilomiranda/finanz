@@ -13,7 +13,6 @@ const rootSchema = new GraphQLObjectType({
         },
       },
       resolve: (parent, args, context, info) => {
-        // return parent;
         return userController.getUser(args.id);
       },
     },

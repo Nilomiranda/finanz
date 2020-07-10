@@ -22,6 +22,12 @@ const userType = new GraphQLObjectType({
         return parent.email;
       },
     },
+    createdAt: {
+      type: GraphQLString,
+      resolve: (parent, args, context, info) => {
+        return parent.createdAt;
+      },
+    },
   },
 });
 

@@ -39,31 +39,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-var mongoose_1 = __importDefault(require("mongoose"));
-var User_1 = __importDefault(require("../models/User"));
-var User = mongoose_1["default"].model('User', User_1["default"]);
-exports["default"] = {
-    getUser: function (userId) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user;
+exports.createUser = void 0;
+var graphql_1 = require("graphql");
+var userSchema_1 = __importDefault(require("../schemas/userSchema"));
+var UsersController_1 = __importDefault(require("../controllers/UsersController"));
+exports.createUser = function () {
+    return {
+        type: userSchema_1["default"],
+        args: {
+            email: {
+                type: graphql_1.GraphQLNonNull(graphql_1.GraphQLString)
+            },
+            name: {
+                type: graphql_1.GraphQLNonNull(graphql_1.GraphQLString)
+            },
+            password: {
+                type: graphql_1.GraphQLNonNull(graphql_1.GraphQLString)
+            }
+        },
+        resolve: function (parent, args, context, info) { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, User.findById(userId)];
-                    case 1:
-                        user = _a.sent();
-                        return [2 /*return*/, user];
-                }
+                return [2 /*return*/, UsersController_1["default"].createOne(args)];
             });
-        });
-    },
-    createOne: function (userPayload) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user;
-            return __generator(this, function (_a) {
-                user = new User(userPayload);
-                return [2 /*return*/, user.save()];
-            });
-        });
-    }
+        }); }
+    };
 };
-//# sourceMappingURL=UsersController.js.map
+//# sourceMappingURL=userMutation.js.map

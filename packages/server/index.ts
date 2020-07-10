@@ -4,6 +4,7 @@ import Router from 'koa-router';
 import { ApolloServer, gql } from 'apollo-server-koa';
 import { GraphQLSchema } from 'graphql';
 import rootSchema from './src/schemas/rootSchema';
+import mutation from './src/mutations/rootMutation';
 
 const app = new Koa();
 const router = new Router();
@@ -39,6 +40,7 @@ const apolloServer = new ApolloServer({
   playground: true,
   schema: new GraphQLSchema({
     query: rootSchema,
+    mutation,
   }),
 });
 

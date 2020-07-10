@@ -6,8 +6,15 @@ const User = mongoose.model('User', userSchema);
 export default {
   async getUser(userId: any) {
     const user = await User.findById(userId);
-    console.log('found user -> ', user);
-
     return user;
+  },
+
+  async createOne(userPayload: {
+    name: string;
+    email: string;
+    password: string;
+  }) {
+    const user = new User(userPayload);
+    return user.save();
   },
 };
