@@ -30,7 +30,6 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', async function () {
-  console.log('this on pre save -> ', this);
   // @ts-ignore
   this.password = await bcrypt.hash(this.password, 8);
 });
