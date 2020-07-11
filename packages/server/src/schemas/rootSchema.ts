@@ -1,6 +1,20 @@
-import { GraphQLID, GraphQLNonNull, GraphQLObjectType } from 'graphql';
+import {
+  GraphQLID,
+  GraphQLInterfaceType,
+  GraphQLNonNull,
+  GraphQLObjectType,
+} from 'graphql';
 import userType from './userSchema';
 import userController from '../controllers/UsersController';
+
+export const nodeInterface = new GraphQLInterfaceType({
+  name: 'Node',
+  fields: {
+    id: {
+      type: GraphQLID,
+    },
+  },
+});
 
 const rootSchema = new GraphQLObjectType({
   name: 'RootQueryType',

@@ -1,13 +1,20 @@
-import { GraphQLID, GraphQLObjectType, GraphQLString } from 'graphql';
+import {
+  GraphQLID,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLNonNull,
+} from 'graphql';
+import { nodeInterface } from './rootSchema';
 
 const userType = new GraphQLObjectType({
   name: 'UserType',
   description: 'Query for a specific user',
+  interfaces: () => [nodeInterface],
   fields: {
-    _id: {
+    id: {
       type: GraphQLID,
       resolve: (parent, args, context, info) => {
-        return parent._id;
+        return parent.id;
       },
     },
     name: {
