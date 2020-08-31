@@ -9,12 +9,16 @@ export default {
     return user;
   },
 
-  async createOne(userPayload: {
-    name: string;
-    email: string;
-    password: string;
+  async getUsers() {
+    return User.find();
+  },
+
+  async createOne({
+    input,
+  }: {
+    input: { email: string; name: string; password: string };
   }) {
-    const user = new User(userPayload);
+    const user = new User(input);
     return user.save();
   },
 };

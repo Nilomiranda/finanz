@@ -1,6 +1,7 @@
 import {
   GraphQLID,
   GraphQLInterfaceType,
+  GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
 } from 'graphql';
@@ -28,6 +29,13 @@ const rootSchema = new GraphQLObjectType({
       },
       resolve: (parent, args, context, info) => {
         return userController.getUser(args.id);
+      },
+    },
+    // TODO -> This needs to return a UserConnection
+    users: {
+      type: GraphQLList(userType),
+      resolve: (parent, args, context, info) => {
+        return userController.getUsers();
       },
     },
   },
