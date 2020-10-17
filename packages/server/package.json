@@ -18,6 +18,7 @@
   "dependencies": {
     "apollo-server-koa": "^2.15.1",
     "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "koa": "^2.13.0",
     "koa-mongo": "^1.9.1",

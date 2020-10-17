@@ -5,11 +5,16 @@ import { ApolloServer, gql } from 'apollo-server-koa';
 import { GraphQLSchema } from 'graphql';
 import rootSchema from './src/schemas/rootSchema';
 import mutation from './src/mutations/rootMutation';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = new Koa();
 const router = new Router();
 
-mongoose.connect('mongodb://localhost/finanz?authSource=admin', {
+console.log(process.env.MONGODB_URL);
+
+mongoose.connect(process.env.MONGODB_URL || '', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
