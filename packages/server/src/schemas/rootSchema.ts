@@ -40,7 +40,6 @@ const rootSchema = new GraphQLObjectType({
     users: {
       type: GraphQLList(userType),
       resolve: (parent, args, context, info) => {
-        authGuard(context)
         return userController.getUsers();
       },
     },
