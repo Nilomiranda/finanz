@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:dev": "tsc-watch --onSuccess \"node dist/index.js\""
+    "server:dev": "tsc-watch --onSuccess \"node dist/index.js\""
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

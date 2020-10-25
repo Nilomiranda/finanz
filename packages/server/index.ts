@@ -12,8 +12,6 @@ dotenv.config();
 const app = new Koa();
 const router = new Router();
 
-console.log(process.env.MONGODB_URL);
-
 mongoose.connect(process.env.MONGODB_URL || '', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -28,19 +26,6 @@ db.once('open', () => {
   console.log('Successfully connected to database');
 });
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-};
-
 const apolloServer = new ApolloServer({
   playground: true,
   schema: new GraphQLSchema({
@@ -50,16 +35,6 @@ const apolloServer = new ApolloServer({
 });
 
 apolloServer.applyMiddleware({ app });
-
-// const testSchema = new mongoose.Schema({
-//   name: String,
-// });
-//
-// const test = mongoose.model('Test', testSchema);
-//
-// const newTest = new test({ name: 'Danilo' });
-//
-// newTest.save();
 
 app.use(router.routes());
 

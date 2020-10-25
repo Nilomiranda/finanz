@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start:dev": "tsc-watch --onSuccess node ./index.ts"
+    "server:dev": "lerna run server:dev"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
