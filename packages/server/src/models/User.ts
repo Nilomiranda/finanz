@@ -1,5 +1,5 @@
 // tslint:disable:only-arrow-functions
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 const Schema = mongoose.Schema;
@@ -33,5 +33,11 @@ userSchema.pre('save', async function () {
   // @ts-ignore
   this.password = await bcrypt.hash(this.password, 8);
 });
+
+export interface UserDocument extends Document {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export default userSchema;
