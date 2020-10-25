@@ -23,8 +23,6 @@ export default {
       throw new AuthenticationError('Wrong credentials. Check email or password')
     }
 
-    console.log({ user })
-
     if (!(await validatePassword(password, user?.password))) {
       throw new AuthenticationError('Wrong credentials. Check email or password')
     }

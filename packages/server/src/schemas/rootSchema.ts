@@ -10,6 +10,8 @@ import userType from './userSchema';
 import userController from '../controllers/UsersController';
 import authController from '../controllers/AuthController'
 import authType from './authSchema';
+import { authGuard } from '../guards/authGuard';
+import { AuthenticationError } from 'apollo-server-koa';
 
 export const nodeInterface = new GraphQLInterfaceType({
   name: 'Node',
@@ -38,6 +40,7 @@ const rootSchema = new GraphQLObjectType({
     users: {
       type: GraphQLList(userType),
       resolve: (parent, args, context, info) => {
+        authGuard(context)
         return userController.getUsers();
       },
     },

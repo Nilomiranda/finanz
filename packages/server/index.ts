@@ -1,4 +1,4 @@
-import Koa from 'koa';
+import Koa, { Context } from 'koa';
 import mongoose from 'mongoose';
 import Router from 'koa-router';
 import { ApolloServer, gql } from 'apollo-server-koa';
@@ -6,6 +6,7 @@ import { GraphQLSchema } from 'graphql';
 import rootSchema from './src/schemas/rootSchema';
 import mutation from './src/mutations/rootMutation';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser'
 
 dotenv.config();
 
@@ -32,14 +33,14 @@ const apolloServer = new ApolloServer({
     query: rootSchema,
     mutation,
   }),
-  context: ({ ctx }) => {
-    // console.log('ctx', ctx)
+  context: ({ ctx }: { ctx: Context }) => {
     return ctx
   }
 });
 
 apolloServer.applyMiddleware({ app });
 
+app.use(cookieParser())
 app.use(router.routes());
 
 app.listen(3000, () => {
