@@ -4,9 +4,12 @@ import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
+  GraphQLString,
 } from 'graphql';
 import userType from './userSchema';
 import userController from '../controllers/UsersController';
+import authController from '../controllers/AuthController'
+import authType from './authSchema';
 
 export const nodeInterface = new GraphQLInterfaceType({
   name: 'Node',
@@ -38,6 +41,16 @@ const rootSchema = new GraphQLObjectType({
         return userController.getUsers();
       },
     },
+    login: {
+      type: authType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve: (parent, args, context, info) => {
+        return authController.login(args.email, args.password, context)
+      }
+    }
   },
 });
 

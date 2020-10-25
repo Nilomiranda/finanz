@@ -32,6 +32,10 @@ const apolloServer = new ApolloServer({
     query: rootSchema,
     mutation,
   }),
+  context: ({ ctx }) => {
+    // console.log('ctx', ctx)
+    return ctx
+  }
 });
 
 apolloServer.applyMiddleware({ app });
