@@ -1,17 +1,15 @@
 import {
   GraphQLID,
   GraphQLInterfaceType,
-  GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
-import userType from './userSchema';
+import userType, { UserConnection } from './userSchema';
 import userController from '../controllers/UsersController';
 import authController from '../controllers/AuthController'
 import authType from './authSchema';
-import { authGuard } from '../guards/authGuard';
-import { AuthenticationError } from 'apollo-server-koa';
+import { connectionArgs, connectionFromPromisedArray } from 'graphql-relay'
 
 export const nodeInterface = new GraphQLInterfaceType({
   name: 'Node',
@@ -36,11 +34,14 @@ const rootSchema = new GraphQLObjectType({
         return userController.getUser(args.id);
       },
     },
-    // TODO -> This needs to return a UserConnection
     users: {
-      type: GraphQLList(userType),
+      type: UserConnection,
+      args: connectionArgs,
       resolve: (parent, args, context, info) => {
-        return userController.getUsers();
+        return connectionFromPromisedArray(
+          userController.getUsers(),
+          args
+        )
       },
     },
     login: {
