@@ -10,7 +10,7 @@ const Container = styled.View`
   padding: 0 45px;
 `;
 
-const AuthChoiceScreen = ({ navigation }: { navigation }) => {
+const AuthChoiceScreen = ({ navigation }: { navigation: any }) => {
   const handleGoToSignIn = () => {
     navigation.navigate('SignInScreen');
   };

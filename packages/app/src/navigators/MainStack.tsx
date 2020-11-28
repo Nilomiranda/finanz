@@ -19,7 +19,10 @@ const MainStack = () => {
       <Stack.Screen
         name="SignInScreen"
         component={SignInScreen}
-        options={{ title: '', headerLeft: BackButton }}
+        options={(props) => ({
+          title: '',
+          headerLeft: () => <BackButton navigation={props.navigation} />,
+        })}
       />
       <Stack.Screen
         name="SignUpScreen"
