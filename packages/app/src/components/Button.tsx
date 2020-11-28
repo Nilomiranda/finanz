@@ -10,8 +10,8 @@ interface ButtonProps {
 }
 
 const StyledButton = styled.TouchableOpacity<{ appearance: ButtonAppearance }>`
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 20px 10px;
   background: ${({ appearance }) =>
     appearance === 'primary' ? 'black' : 'transparent'};
   border: 2px solid black;
@@ -23,6 +23,7 @@ const StyledButton = styled.TouchableOpacity<{ appearance: ButtonAppearance }>`
 const ButtonLabel = styled.Text<{ appearance: ButtonAppearance }>`
   color: ${({ appearance }) => (appearance === 'primary' ? 'white' : 'black')};
   font-weight: bold;
+  font-size: 16px;
 `;
 
 const Button = ({
