@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Button from '../../components/Button';
 import Margin from '../../components/Margin';
-import { NativeStackNavigatorProps } from 'react-native-screens/lib/typescript/types';
 
 const Container = styled.View`
   flex: 1;
