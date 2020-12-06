@@ -5,7 +5,7 @@ import { nodeInterface } from "./rootSchema";
 import userType from "./userSchema";
 
 export const EntryGraphqlEnumType = new GraphQLEnumType({
-  name: 'ENtryType',
+  name: 'EntryTypeEnum',
   values: {
     INCOME: {
       value: EntryType.INCOME
@@ -17,7 +17,7 @@ export const EntryGraphqlEnumType = new GraphQLEnumType({
 })
 
 const entryType = new GraphQLObjectType({
-  name: 'Entry type',
+  name: 'EntryType',
   description: 'Query for a user entry',
   interfaces: () => [nodeInterface],
   fields: {

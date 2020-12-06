@@ -1,8 +1,8 @@
-import { GraphQLInt, GraphQLNonNull, GraphQLObjectType } from "graphql";
+import { GraphQLInputObjectType, GraphQLInt, GraphQLNonNull, GraphQLObjectType } from "graphql";
 import entryType, { EntryGraphqlEnumType } from "../schemas/entrySchema";
 import entryController from '../controllers/EntryController';
 
-export const NewEntryInput = new GraphQLObjectType({
+export const NewEntryInput = new GraphQLInputObjectType({
   name: 'NewEntryInput',
   fields: {
     amount: {
