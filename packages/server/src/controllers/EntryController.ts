@@ -14,5 +14,9 @@ export default {
     const signedAmount = input.type === EntryType.INCOME ? input.amount : input.amount * -1
     const entry = new Entry({ ...input, amount: signedAmount, userId: context.state.userId });
     return entry.save();
+  },
+
+  async getEntries() {
+    return Entry.find()
   }
 }
