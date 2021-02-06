@@ -1,3 +1,4 @@
+import { Context } from 'koa'
 import mongoose from 'mongoose'
 import { EntryType } from 'perf_hooks'
 import entrySchema from '../models/Entry'
@@ -10,8 +11,9 @@ interface NewEntryInput {
 }
 
 export default {
-  async createOne({ input }: { input: NewEntryInput }) {
-    const entry = new Entry(input);
+  async createOne({ input }: { input: NewEntryInput }, context: Context) {
+    const entry = new Entry({ ...input, userId: context.state.userId });
+    console.log({ entry })
     return entry.save();
   }
 }

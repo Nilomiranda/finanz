@@ -25,7 +25,7 @@ export const createNewEntry = () => {
     },
     resolve: (parent, args, context, info) => {
       authGuard(context)
-      return entryController.createOne(args)
+      return entryController.createOne(args, context)
     }
   }
 }

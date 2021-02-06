@@ -1,4 +1,4 @@
-import { GraphQLEnumType, GraphQLInt, GraphQLNonNull, GraphQLObjectType } from "graphql";
+import { GraphQLEnumType, GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { globalIdField, connectionDefinitions } from 'graphql-relay';
 import { EntryType } from "../models/Entry";
 import { nodeInterface } from "./rootSchema";
@@ -34,10 +34,10 @@ const entryType = new GraphQLObjectType({
         return parent.type;
       }
     },
-    user: {
-      type: new GraphQLNonNull(userType),
+    userId: {
+      type: new GraphQLNonNull(GraphQLString),
       resolve: (parent, args, context, info) => {
-        return parent.user
+        return parent.userId
       },
     }
   }
