@@ -1,7 +1,6 @@
 import { Context } from 'koa'
 import mongoose from 'mongoose'
-import { EntryType } from 'perf_hooks'
-import entrySchema from '../models/Entry'
+import entrySchema, { EntryType } from '../models/Entry'
 
 const Entry = mongoose.model('Entry', entrySchema)
 
@@ -12,8 +11,8 @@ interface NewEntryInput {
 
 export default {
   async createOne({ input }: { input: NewEntryInput }, context: Context) {
-    const entry = new Entry({ ...input, userId: context.state.userId });
-    console.log({ entry })
+    const signedAmount = input.type === EntryType.INCOME ? input.amount : input.amount * -1
+    const entry = new Entry({ ...input, amount: signedAmount, userId: context.state.userId });
     return entry.save();
   }
 }

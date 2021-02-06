@@ -11,7 +11,6 @@ export const authGuard = (ctx: Context) => {
 
   try {
     const verifiedToken = jwt.verify(token, process.env.APP_SECRET || '')
-    console.log({ verifiedToken })
     ctx.state.userId = (verifiedToken as Record<string, string | number>).userId
     return verifiedToken
   } catch (err) {
