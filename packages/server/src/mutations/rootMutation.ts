@@ -1,5 +1,4 @@
 import { GraphQLObjectType } from 'graphql';
-import userType from '../schemas/userSchema';
 import { createNewEntry } from './entryMutation';
 import { createUser } from './userMutation';
 
