@@ -11,7 +11,7 @@ import authController from '../controllers/AuthController'
 import entryController from '../controllers/EntryController'
 import authType from './authSchema';
 import { connectionArgs, connectionFromPromisedArray } from 'graphql-relay'
-import { EntryConnection } from './entrySchema';
+import entryType, { EntryConnection } from './entrySchema';
 
 export const nodeInterface = new GraphQLInterfaceType({
   name: 'Node',
@@ -45,6 +45,17 @@ const rootSchema = new GraphQLObjectType({
           args
         )
       },
+    },
+    entry: {
+      type: entryType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+        },
+      },
+      resolve: (parent, args, contet, info) => {
+        return entryController.getEntry(args.id)
+      }
     },
     entries: {
       type: EntryConnection,

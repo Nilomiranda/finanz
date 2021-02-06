@@ -18,5 +18,9 @@ export default {
 
   async getEntries() {
     return Entry.find()
+  },
+
+  async getEntry(id: string) {
+    return Entry.findById(id)
   }
 }
