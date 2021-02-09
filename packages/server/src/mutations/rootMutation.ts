@@ -1,5 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
-import userType from '../schemas/userSchema';
+import { createNewEntry } from './entryMutation';
 import { createUser } from './userMutation';
 
 const mutation = new GraphQLObjectType({
@@ -7,6 +7,7 @@ const mutation = new GraphQLObjectType({
   description: 'Root mutations',
   fields: {
     createUser: createUser(),
+    createEntry: createNewEntry(),
   },
 });
 

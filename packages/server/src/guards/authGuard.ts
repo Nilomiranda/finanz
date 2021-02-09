@@ -10,7 +10,9 @@ export const authGuard = (ctx: Context) => {
   }
 
   try {
-    return jwt.verify(token, process.env.APP_SECRET || '')
+    const verifiedToken = jwt.verify(token, process.env.APP_SECRET || '')
+    ctx.state.userId = (verifiedToken as Record<string, string | number>).userId
+    return verifiedToken
   } catch (err) {
     throw new AuthenticationError('You must login first')
   }

@@ -8,8 +8,10 @@ import {
 import userType, { UserConnection } from './userSchema';
 import userController from '../controllers/UsersController';
 import authController from '../controllers/AuthController'
+import entryController from '../controllers/EntryController'
 import authType from './authSchema';
 import { connectionArgs, connectionFromPromisedArray } from 'graphql-relay'
+import entryType, { EntryConnection } from './entrySchema';
 
 export const nodeInterface = new GraphQLInterfaceType({
   name: 'Node',
@@ -41,6 +43,27 @@ const rootSchema = new GraphQLObjectType({
         return connectionFromPromisedArray(
           userController.getUsers(),
           args
+        )
+      },
+    },
+    entry: {
+      type: entryType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+        },
+      },
+      resolve: (parent, args, contet, info) => {
+        return entryController.getEntry(args.id)
+      }
+    },
+    entries: {
+      type: EntryConnection,
+      args: connectionArgs,
+      resolve: (parent, args, context, info) => {
+        return connectionFromPromisedArray(
+          entryController.getEntries(),
+          args,
         )
       },
     },
