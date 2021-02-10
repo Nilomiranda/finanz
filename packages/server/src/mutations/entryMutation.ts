@@ -1,19 +1,27 @@
-import { GraphQLInputObjectType, GraphQLInt, GraphQLNonNull, GraphQLObjectType } from "graphql";
-import entryType, { EntryGraphqlEnumType } from "../schemas/entrySchema";
+import {
+  GraphQLInputObjectType,
+  GraphQLInt,
+  GraphQLNonNull,
+  GraphQLString,
+} from 'graphql';
+import entryType, { EntryGraphqlEnumType } from '../schemas/entrySchema';
 import entryController from '../controllers/EntryController';
-import { authGuard } from "../guards/authGuard";
+import { authGuard } from '../guards/authGuard';
 
 export const NewEntryInput = new GraphQLInputObjectType({
   name: 'NewEntryInput',
   fields: {
     amount: {
-      type: GraphQLNonNull(GraphQLInt)
+      type: GraphQLNonNull(GraphQLInt),
     },
     type: {
       type: GraphQLNonNull(EntryGraphqlEnumType),
     },
-  }
-})
+    name: {
+      type: GraphQLNonNull(GraphQLString),
+    },
+  },
+});
 
 export const createNewEntry = () => {
   return {
@@ -24,8 +32,8 @@ export const createNewEntry = () => {
       },
     },
     resolve: (parent, args, context, info) => {
-      authGuard(context)
-      return entryController.createOne(args, context)
-    }
-  }
-}
+      authGuard(context);
+      return entryController.createOne(args, context);
+    },
+  };
+};

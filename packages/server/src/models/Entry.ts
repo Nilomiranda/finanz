@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose';
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 export enum EntryType {
   INCOME = 'INCOME',
@@ -16,6 +16,10 @@ const entrySchema = new Schema({
     type: EntryType,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   userId: {
     type: String,
     required: true,
@@ -24,12 +28,13 @@ const entrySchema = new Schema({
     type: Date,
     default: Date.now,
   },
-})
+});
 
 export interface EntryDocument extends Document {
-  amount: number
-  type: EntryType
-  userId: string
+  amount: number;
+  type: EntryType;
+  name: string;
+  userId: string;
 }
 
-export default entrySchema
+export default entrySchema;
