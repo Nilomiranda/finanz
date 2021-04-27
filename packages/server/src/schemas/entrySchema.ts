@@ -43,7 +43,7 @@ const entryType = new GraphQLObjectType({
     name: {
       type: new GraphQLNonNull(GraphQLString),
       resolve: (parent, args, context, info) => {
-        return parent.name;
+        return parent.name || '';
       },
     },
     userId: {
