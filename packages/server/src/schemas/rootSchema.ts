@@ -7,10 +7,14 @@ import {
 } from 'graphql';
 import userType, { UserConnection } from './userSchema';
 import userController from '../controllers/UsersController';
-import authController from '../controllers/AuthController'
-import entryController from '../controllers/EntryController'
+import authController from '../controllers/AuthController';
+import entryController from '../controllers/EntryController';
 import authType from './authSchema';
-import { connectionArgs, connectionFromPromisedArray } from 'graphql-relay'
+import {
+  connectionArgs,
+  connectionFromPromisedArray,
+  fromGlobalId,
+} from 'graphql-relay';
 import entryType, { EntryConnection } from './entrySchema';
 
 export const nodeInterface = new GraphQLInterfaceType({
@@ -33,17 +37,14 @@ const rootSchema = new GraphQLObjectType({
         },
       },
       resolve: (parent, args, context, info) => {
-        return userController.getUser(args.id);
+        return userController.getUser(fromGlobalId(args.id).id);
       },
     },
     users: {
       type: UserConnection,
       args: connectionArgs,
       resolve: (parent, args, context, info) => {
-        return connectionFromPromisedArray(
-          userController.getUsers(),
-          args
-        )
+        return connectionFromPromisedArray(userController.getUsers(), args);
       },
     },
     entry: {
@@ -54,29 +55,26 @@ const rootSchema = new GraphQLObjectType({
         },
       },
       resolve: (parent, args, contet, info) => {
-        return entryController.getEntry(args.id)
-      }
+        return entryController.getEntry(fromGlobalId(args.id).id);
+      },
     },
     entries: {
       type: EntryConnection,
       args: connectionArgs,
       resolve: (parent, args, context, info) => {
-        return connectionFromPromisedArray(
-          entryController.getEntries(),
-          args,
-        )
+        return connectionFromPromisedArray(entryController.getEntries(), args);
       },
     },
     login: {
       type: authType,
       args: {
         email: { type: GraphQLString },
-        password: { type: GraphQLString }
+        password: { type: GraphQLString },
       },
       resolve: (parent, args, context, info) => {
-        return authController.login(args.email, args.password, context)
-      }
-    }
+        return authController.login(args.email, args.password, context);
+      },
+    },
   },
 });
 
