@@ -6,7 +6,14 @@ import ForgotPasswordScreen from '../modules/auth/ForgotPasswordScreen';
 import AuthChoiceScreen from '../modules/auth/AuthChoiceScreen';
 import BackButton from '../components/navigators/BackButton';
 
-const Stack = createStackNavigator();
+export type MainStackParamList = {
+  AuthChoiceScreen: undefined;
+  SignInScreen: undefined;
+  SignUpScreen: undefined;
+  ForgotPasswordScreen: undefined;
+};
+
+const Stack = createStackNavigator<MainStackParamList>();
 
 const MainStack = () => {
   return (

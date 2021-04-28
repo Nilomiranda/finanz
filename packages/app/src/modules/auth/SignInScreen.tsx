@@ -3,7 +3,10 @@ import Input from '../../components/Input';
 import styled from 'styled-components/native';
 import Margin from '../../components/Margin';
 import Button from '../../components/Button';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { MainStackParamList } from '../../navigators/MainStack';
+import { LinkText } from '../../styles';
 
 const Container = styled.View`
   flex: 1;
@@ -12,7 +15,16 @@ const Container = styled.View`
   padding: 10px 50px;
 `;
 
-const SignInScreen = () => {
+type SignInScreenNavigationProp = StackNavigationProp<
+  MainStackParamList,
+  'SignInScreen'
+>;
+
+const SignInScreen = ({
+  navigation,
+}: {
+  navigation: SignInScreenNavigationProp;
+}) => {
   return (
     <Container>
       <Margin margin={{ top: 0, bottom: 30 }}>
@@ -20,6 +32,11 @@ const SignInScreen = () => {
       </Margin>
       <Margin margin={{ bottom: 30 }}>
         <Input label="Password" type="password" />
+      </Margin>
+      <Margin margin={{ bottom: 30 }}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
+          <LinkText>Don't have an account? Create one</LinkText>
+        </TouchableOpacity>
       </Margin>
       <Margin>
         <Button>

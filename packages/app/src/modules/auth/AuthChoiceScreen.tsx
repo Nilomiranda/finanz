@@ -14,12 +14,18 @@ const AuthChoiceScreen = ({ navigation }: { navigation: any }) => {
     navigation.navigate('SignInScreen');
   };
 
+  const handleGoToSignUp = () => {
+    navigation.navigate('SignUpScreen');
+  };
+
   return (
     <Container>
       <Margin margin={{ bottom: 35 }}>
         <Button onPress={handleGoToSignIn}>Sign In</Button>
       </Margin>
-      <Button appearance="secondary">Create Account</Button>
+      <Button appearance="secondary" onPress={handleGoToSignUp}>
+        Create Account
+      </Button>
     </Container>
   );
 };
