@@ -1,14 +1,29 @@
 import {
   GraphQLEnumType,
+  GraphQLID,
+  GraphQLInputObjectType,
   GraphQLInt,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
+  GraphQLFieldConfigArgumentMap,
 } from 'graphql';
 import { globalIdField, connectionDefinitions } from 'graphql-relay';
 import { EntryType } from '../models/Entry';
 import { nodeInterface } from './rootSchema';
-import userType from './userSchema';
+
+export const fetchEntriesArgsDefinition: GraphQLFieldConfigArgumentMap = {
+  userId: { type: GraphQLID },
+  createdDate: {
+    type: new GraphQLInputObjectType({
+      name: 'DateFilterArgs',
+      fields: {
+        start: { type: GraphQLString },
+        end: { type: GraphQLString },
+      },
+    }),
+  },
+};
 
 export const EntryGraphqlEnumType = new GraphQLEnumType({
   name: 'EntryTypeEnum',

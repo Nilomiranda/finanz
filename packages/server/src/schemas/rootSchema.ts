@@ -4,6 +4,7 @@ import {
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
+  GraphQLInputObjectType,
 } from 'graphql';
 import userType, { UserConnection } from './userSchema';
 import userController from '../controllers/UsersController';
@@ -15,7 +16,10 @@ import {
   connectionFromPromisedArray,
   fromGlobalId,
 } from 'graphql-relay';
-import entryType, { EntryConnection } from './entrySchema';
+import entryType, {
+  EntryConnection,
+  fetchEntriesArgsDefinition,
+} from './entrySchema';
 
 export const nodeInterface = new GraphQLInterfaceType({
   name: 'Node',
@@ -60,9 +64,18 @@ const rootSchema = new GraphQLObjectType({
     },
     entries: {
       type: EntryConnection,
-      args: connectionArgs,
+      args: {
+        ...connectionArgs,
+        ...fetchEntriesArgsDefinition,
+      },
       resolve: (parent, args, context, info) => {
-        return connectionFromPromisedArray(entryController.getEntries(), args);
+        return connectionFromPromisedArray(
+          entryController.getEntries({
+            userId: args?.userId,
+            createdDate: args?.createdDate,
+          }),
+          args
+        );
       },
     },
     login: {
