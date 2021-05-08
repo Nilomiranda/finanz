@@ -2,7 +2,9 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "server:dev": "lerna run server:dev"
+    "server:dev": "lerna run server:dev --stream",
+    "ios": "lerna run ios --stream",
+    "android": "lerna run android --stream"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
