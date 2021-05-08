@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx ts tsx"
+    "relay": "relay-compiler --src ./src --schema ./src/graphql/schema.graphql --extensions js jsx ts tsx --watch"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",

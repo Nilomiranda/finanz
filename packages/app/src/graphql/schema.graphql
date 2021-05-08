@@ -1,0 +1,119 @@
+schema {
+  query: RootQueryType
+  mutation: Mutation
+}
+
+type RootQueryType {
+  user(id: ID!): UserType
+  users(after: String, first: Int, before: String, last: Int): UserTypeConnection
+  entry(id: ID!): EntryType
+  entries(after: String, first: Int, before: String, last: Int, userId: ID, createdDate: DateFilterArgs): EntryTypeConnection
+  login(email: String, password: String): AuthType
+}
+
+"""Query for a specific user"""
+type UserType implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  email: String
+  createdAt: String
+}
+
+interface Node {
+  id: ID
+}
+
+"""A connection to a list of items."""
+type UserTypeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserTypeEdge]
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""An edge in a connection."""
+type UserTypeEdge {
+  """The item at the end of the edge"""
+  node: UserType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Query for a user entry"""
+type EntryType implements Node {
+  """The ID of an object"""
+  id: ID!
+  amount: Int!
+  type: EntryTypeEnum!
+  name: String!
+  userId: String!
+}
+
+enum EntryTypeEnum {
+  INCOME
+  EXPENSE
+}
+
+"""A connection to a list of items."""
+type EntryTypeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [EntryTypeEdge]
+}
+
+"""An edge in a connection."""
+type EntryTypeEdge {
+  """The item at the end of the edge"""
+  node: EntryType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input DateFilterArgs {
+  start: String
+  end: String
+}
+
+"""Authentication related object"""
+type AuthType {
+  success: Boolean!
+}
+
+"""Root mutations"""
+type Mutation {
+  createUser(input: NewUserInput): UserType
+  createEntry(input: NewEntryInput): EntryType
+}
+
+input NewUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input NewEntryInput {
+  amount: Int!
+  type: EntryTypeEnum!
+  name: String!
+}
