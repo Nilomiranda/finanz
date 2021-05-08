@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server:dev": "tsc-watch --onSuccess \"node dist/index.js\""
+    "server:dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "update:schema": "npx -p @babel/core -p @babel/node babel-node ./src/scripts/generateSchema.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

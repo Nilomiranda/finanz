@@ -6,7 +6,7 @@ import { GraphQLSchema } from 'graphql';
 import rootSchema from './src/schemas/rootSchema';
 import mutation from './src/mutations/rootMutation';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser'
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -27,20 +27,22 @@ db.once('open', () => {
   console.log('Successfully connected to database');
 });
 
-const apolloServer = new ApolloServer({
+export const schemaObject = new GraphQLSchema({
+  query: rootSchema,
+  mutation,
+});
+
+export const apolloServer = new ApolloServer({
   playground: true,
-  schema: new GraphQLSchema({
-    query: rootSchema,
-    mutation,
-  }),
+  schema: schemaObject,
   context: ({ ctx }: { ctx: Context }) => {
-    return ctx
-  }
+    return ctx;
+  },
 });
 
 apolloServer.applyMiddleware({ app });
 
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(router.routes());
 
 app.listen(3000, () => {
