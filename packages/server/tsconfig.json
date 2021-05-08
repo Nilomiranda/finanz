@@ -6,6 +6,7 @@
     "lib": ["esnext"],
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true
   }
 }
